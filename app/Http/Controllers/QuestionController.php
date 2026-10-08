@@ -25,9 +25,14 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
- public function store(Request $request)
+public function store(Request $request)
 {
-    // dd($request->all());
+    // Validasi data masukan dari form
+    $request->validate([
+        'nama'       => 'required|min:5',
+        'email'      => ['required', 'email'],
+        'pertanyaan' => 'required|min:10|max:300',
+    ]);
 
     $data['nama']       = $request->nama;
     $data['email']      = $request->email;
