@@ -27,13 +27,21 @@ class QuestionController extends Controller
      */
 public function store(Request $request)
 {
-    // Validasi data masukan dari form
+    // 1. Validasi request dengan pesan kustom bahasa Indonesia
     $request->validate([
         'nama'       => 'required|min:5',
         'email'      => ['required', 'email'],
         'pertanyaan' => 'required|min:10|max:300',
+    ], [
+        'nama.required'       => 'Nama tidak boleh kosong',
+        'nama.min'            => 'Nama minimal 5 karakter',
+        'email.required'      => 'Email tidak boleh kosong',
+        'email.email'         => 'Email Tidak valid',
+        'pertanyaan.required' => 'Pertanyaan tidak boleh kosong',
+        'pertanyaan.min'      => 'Pertanyaan minimal 10 karakter',
     ]);
 
+    // 2. Ambil data jika validasi lolos
     $data['nama']       = $request->nama;
     $data['email']      = $request->email;
     $data['pertanyaan'] = $request->pertanyaan;
