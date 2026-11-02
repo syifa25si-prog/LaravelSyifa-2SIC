@@ -44,7 +44,9 @@
                     <span class="mt-1 ms-1 sidebar-text">Volt Overview</span>
                 </a>
             </li>
-            <li class="nav-item">
+
+            <!-- Menu Dashboard (Aktif dinamis berdasarkan route 'dashboard') -->
+            <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -55,8 +57,9 @@
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
-            <!-- Menu Pelanggan -->
-            <li class="nav-item active">
+
+            <!-- Menu Pelanggan (Aktif dinamis jika route berawalan 'pelanggan.') -->
+            <li class="nav-item {{ request()->routeIs('pelanggan.*') ? 'active' : '' }}">
                 <a href="{{ route('pelanggan.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
