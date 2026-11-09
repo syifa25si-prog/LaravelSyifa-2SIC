@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder; // <-- Import Class Builder
+use Illuminate\Database\Eloquent\Builder;
 
 class Pelanggan extends Model
 {
@@ -23,7 +23,7 @@ class Pelanggan extends Model
     ];
 
     /**
-     * Scope query untuk menyaring data pelanggan secara dinamis
+     * Scope query untuk filter pasti (Equals / =)
      */
     public function scopeFilter(Builder $query, $request, array $filterableColumns)
     {
@@ -32,6 +32,22 @@ class Pelanggan extends Model
                 $query->where($column, $request->input($column));
             }
         }
+        return $query;
+    }
+
+    /**
+     * Scope query untuk pencarian kata kunci (LIKE %key%)
+     */
+    public function scopeSearch(Builder $query, $request, array $searchableColumns)
+    {
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request, $searchableColumns) {
+                foreach ($searchableColumns as $column) {
+                    $q->orWhere($column, 'LIKE', '%' . $request->input('search') . '%');
+                }
+            });
+        }
+
         return $query;
     }
 }
