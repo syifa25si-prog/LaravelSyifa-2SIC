@@ -52,6 +52,19 @@
             <div class="card-body">
                 <div class="table-responsive">
 
+                    {{-- Form Filter Gender --}}
+                    <form method="GET" action="{{ route('pelanggan.index') }}" onchange="this.submit()">
+                        <div class="row mb-3">
+                            <div class="col-md-2">
+                                <select name="gender" class="form-select">
+                                    <option value="">All</option>
+                                    <option value="Male" {{ request('gender') == 'Male' ? 'selected' : '' }}>Male</option>
+                                    <option value="Female" {{ request('gender') == 'Female' ? 'selected' : '' }}>Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
                     <table id="table-pelanggan"
                         class="table table-centered table-nowrap mb-0 rounded">
 
