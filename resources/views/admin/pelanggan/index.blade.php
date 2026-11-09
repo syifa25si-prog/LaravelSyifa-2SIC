@@ -1,4 +1,3 @@
-
 @extends('layouts.admin.app')
 
 @section('content')
@@ -106,6 +105,11 @@
                         </tbody>
 
                     </table>
+
+                    {{-- Link Navigasi Pagination --}}
+                    <div class="mt-3">
+                        {{ $dataPelanggan->links('pagination::bootstrap-5') }}
+                    </div>
 
                 </div>
             </div>
