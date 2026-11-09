@@ -52,7 +52,7 @@
             <div class="card-body">
                 <div class="table-responsive">
 
-                    {{-- Form Filter Gender & Search --}}
+                    {{-- Form Filter Gender & Search dengan Clear Search --}}
                     <form method="GET" action="{{ route('pelanggan.index') }}">
                         <div class="row mb-3">
                             <!-- Filter Gender -->
@@ -65,8 +65,8 @@
                                 </select>
                             </div>
 
-                            <!-- Form Input Search -->
-                            <div class="col-md-3">
+                            <!-- Form Input Search & Tombol Clear Search -->
+                            <div class="col-md-4">
                                 <div class="input-group">
                                     <input type="text" name="search" class="form-control" placeholder="Search" value="{{ request('search') }}">
                                     <button type="submit" class="btn btn-outline-secondary">
@@ -74,6 +74,13 @@
                                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                                         </svg>
                                     </button>
+
+                                    {{-- Fitur Clear Search --}}
+                                    @if(request('search'))
+                                        <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}" class="btn btn-outline-danger">
+                                            Clear
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
